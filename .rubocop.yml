@@ -66,7 +66,7 @@ Metrics/BlockLength:
     - "config/environments/*"
     - "config/routes.rb"
     - "config/routes.rb"
-    - "db/migrate/20241217130323_create_feedback_responses.rb"
+    - "db/migrate/*"
 
 Metrics/ClassLength:
   CountAsOne: ["array", "hash", "heredoc"]
@@ -75,7 +75,7 @@ Metrics/MethodLength:
   CountAsOne: ["array", "hash", "heredoc"]
   Max: 13
   Exclude:
-    - "db/migrate/20241217130323_create_feedback_responses.rb"
+    - "db/migrate/*"
 
 Naming/VariableNumber:
   Enabled: false

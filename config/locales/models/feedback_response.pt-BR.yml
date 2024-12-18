@@ -1,0 +1,78 @@
+pt-BR:
+  activerecord:
+    models:
+      feedback_responses: Dados de feedback
+    attributes:
+      feedback_responses: 
+        name: Nome
+        email: Email
+        corporate_email: Email Corporativo
+        department_id: Área
+        position_id: Cargo
+        function_id: Funcao
+        location: Localidade
+        company_tenure: Tempo de empresa
+        gender: Gênero
+        generation: Geração
+        company_level_0: Empresa nível 1
+        directorate_level_1: Diretoria nível 1
+        management_level_2: Gerencia nível 1
+        coordination_level_3: Coordenação nível 1
+        area_level_4: Área nível 1
+        response_date: Data da Resposta
+        interest_in_position: Interesse no Cargo
+        comments_interest_in_position: Comentários - Interesse no Cargo
+        contribution: Contribuição
+        comments_contribution: Comentários - Contribuição
+        learning_and_development: Aprendizado e Desenvolvimento
+        comments_learning_and_development: Comentários - Aprendizado e Desenvolvimento
+        feedback: Feedback
+        comments_feedback: Comentários - Feedback
+        interaction_with_manager: Interação com Gestor
+        comments_interaction_with_manager: Comentários - Interação com Gestor
+        clarity_about_career_opportunities: Clareza sobre Possibilidades de Carreira
+        comments_clarity_about_career_opportunities: Comentários - Clareza sobre Possibilidades de Carreira
+        expectation_of_permanence: Expectativa de Permanência
+        comments_expectation_of_permanence: Comentários - Expectativa de Permanência
+        employee_net_promoter_score: eNPS
+        open_comments_enps: eNPS (Aberta)
+        created_at: Criado em
+        updated_at: Atualizado em 
+    messages:
+      processed: Arquivo recebido com sucesso!
+      not_processed: Erro ao processar - %{erro}.
+      blank: "Arquivo contém campos em branco: %{fields}. Processamento interrompido."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

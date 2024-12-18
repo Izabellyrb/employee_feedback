@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails db:create db:migrate && bundle exec rails s -b '0.0.0.0'"
     container_name: employee_feedback
     volumes:
       - ".:/app"
@@ -10,9 +10,6 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://employee_feedback:password@db:5432/employee_feedback_development
-
   db:
     image: postgres:13
     volumes:
