@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -23,5 +25,10 @@ module EmployeeFeedback
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.default_locale = :"pt-BR"
+
+    config.time_zone = "Brasilia"
+
+    config.active_record.default_timezone = :utc
   end
 end
