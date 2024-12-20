@@ -17,11 +17,11 @@ class ImportService
       end
 
       { message: I18n.t("activerecord.messages.processed"), status: :ok }
+    rescue ArgumentError => e
+      { message: I18n.t("activerecord.messages.not_processed", error: e.message), status: :unprocessable_entity }
+    rescue StandardError => e
+      { message: I18n.t("activerecord.messages.not_processed", error: e.message), status: :internal_server_error }
     end
-  rescue ArgumentError => e
-    { message: I18n.t("activerecord.messages.not_processed", error: e.message), status: :unprocessable_entity }
-  rescue StandardError => e
-    { message: I18n.t("activerecord.messages.not_processed", error: e.message), status: :internal_server_error }
   end
 
   private

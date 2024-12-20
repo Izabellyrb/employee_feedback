@@ -19,13 +19,13 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: db
-  username: employee_feedback
-  password: password
+  username: <%= ENV.fetch("POSTGRES_USER", "default_user") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", "default_password") %>
 
 
 development:
   <<: *default
-  database: employee_feedback_development
+  database: <%= ENV.fetch("POSTGRES_DB", "default_development_db") %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: employee_feedback_test
+  database: <%= ENV.fetch("POSTGRES_TEST_DB", "default_test_db") %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,18 +84,18 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: employee_feedback_production
-    username: employee_feedback
+    database: <%= ENV.fetch("POSTGRES_PRODUCTION_DB", "employee_feedback_production") %> 
+    username: <%= ENV.fetch("POSTGRES_USER", "default_user") %>
     password: <%= ENV["EMPLOYEE_FEEDBACK_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
-    database: employee_feedback_production_cache
+    database: <%= ENV.fetch("POSTGRES_PRODUCTION_DB", "employee_feedback_production_cache") %>
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: employee_feedback_production_queue
+    database: <%= ENV.fetch("POSTGRES_PRODUCTION_DB", "employee_feedback_production_queue") %>
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: employee_feedback_production_cable
+    database: <%= ENV.fetch("POSTGRES_PRODUCTION_DB", "employee_feedback_production_cable") %>
     migrations_paths: db/cable_migrate

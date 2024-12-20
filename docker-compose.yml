@@ -15,9 +15,9 @@ services:
     volumes:
       - "postgres_data:/var/lib/postgresql/data"
     environment:
-      POSTGRES_USER: employee_feedback
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: employee_feedback_development
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
 
 volumes:
   postgres_data:
