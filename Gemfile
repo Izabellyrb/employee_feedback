@@ -68,7 +68,7 @@ group :development, :test do
 
   gem "pry-remote"
 
-  gem "rspec-rails", "~> 7.0.0"
+  gem "rspec-rails", "~> 7.1.0"
 
   gem "dotenv-rails"
 end
