@@ -1,5 +1,15 @@
 # Technical Challenge - Employee Feedback
 
+- **[Overview](#overview)**
+- **[Completed Tasks](#completed-tasks)**
+- **[Dataset Overview](#dataset-overview)**
+- **[Getting Started](#getting-started)**
+- **[Running Tests](#running-tests)**
+- **[Import CSV data into the database](#import-csv-data-into-the-database)**
+- **[API Endpoints](#api-endpoints)**
+- **[Assumptions and Decisions](#assumptions-and-decisions)**
+
+
 ## Overview
 
 This project is a flexible solution designed to process and analyze employee feedback data. The application enables structured storage of feedback information, provides insights and exposes a simple REST API for interacting with the dataset.
@@ -79,7 +89,7 @@ docker compose build
 docker compose up
 ```
 
-##  Running Tests
+## Running Tests
 To run the tests, execute the following command:
 ```bash
 docker exec -it employee_feedback bash
