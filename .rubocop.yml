@@ -51,6 +51,10 @@ Layout/MultilineMethodCallBraceLayout:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Layout/LineLength:
+  Exclude:
+    - "spec/requests/api/v1/feedback_responses_controller_spec.rb"
+
 Lint/MissingSuper:
   Enabled: false
 

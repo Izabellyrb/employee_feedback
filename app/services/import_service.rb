@@ -15,11 +15,13 @@ class ImportService
         area_info = AreaInfoService.populate(row)
         FeedbackResponse.find_or_create_by!(feedback_attributes(row, area_info))
       end
-      Rails.logger.debug I18n.t("activerecord.messages.processed")
-    rescue StandardError => e
-      Rails.logger.debug I18n.t("activerecord.messages.not_processed", erro: e)
-      raise "[ImportService] Erro: #{e.message}"
+
+      { message: I18n.t("activerecord.messages.processed"), status: :ok }
     end
+  rescue ArgumentError => e
+    { message: I18n.t("activerecord.messages.not_processed", error: e.message), status: :unprocessable_entity }
+  rescue StandardError => e
+    { message: I18n.t("activerecord.messages.not_processed", error: e.message), status: :internal_server_error }
   end
 
   private
@@ -34,7 +36,9 @@ class ImportService
 
     missing_fields = required_fields.select { |field| row[field].blank? }
 
-    raise I18n.t("activerecord.messages.blank", fields: missing_fields.join(", ")) if missing_fields.any?
+    return unless missing_fields.any?
+
+    raise ArgumentError, I18n.t("activerecord.messages.blank", fields: missing_fields.join(", "))
   end
 
   def feedback_attributes(row, area_info)

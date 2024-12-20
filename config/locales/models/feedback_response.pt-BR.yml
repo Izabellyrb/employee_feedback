@@ -40,8 +40,9 @@ pt-BR:
         updated_at: Atualizado em 
     messages:
       processed: Arquivo recebido com sucesso!
-      not_processed: Erro ao processar - %{erro}.
-      blank: "Arquivo contém campos em branco: %{fields}. Processamento interrompido."
+      not_processed: Erro ao processar - %{error}.
+      blank: "Arquivo contém campos em branco: %{fields}. Processamento cancelado"
+      file_missing: "Insira um arquivo no formato csv."
 
 
 

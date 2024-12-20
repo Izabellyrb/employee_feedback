@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :feedback_response do
     name { "Demo 001" }
-    email { "demo001@pinpeople.com.br" }
-    corporate_email { "demo001@pinpeople.com.br" }
+    email { "demo001@teste.com.br" }
+    corporate_email { "demo001@teste.com.br" }
     location { "brasília" }
     company_tenure { "entre 1 e 2 anos" }
     gender { "masculino" }
