@@ -67,6 +67,9 @@ cd employee_feedback
 ```
 
 - Rename the `env_example.txt` file to `.env` 
+```bash
+mv env_example.txt .env
+```
 
 - Fill in the variables in `.env` with your specific environment values. (Variables for production or test environments are optional and only needed if you plan to use these configurations.)
 
@@ -77,7 +80,7 @@ docker compose up
 ```
 
 ##  Running Tests
-To run the tests:
+To run the tests, execute the following command:
 ```bash
 docker exec -it employee_feedback bash
 bundle exec rspec
@@ -104,7 +107,7 @@ The following endpoints were created to attend the challenge:
 - Import the CSV data into the database. It's required to set the `dataset_file` param and the file path.
 <br>
 
-![alt text](image-1.png)
+![alt text](app/assets/images/image-1.png)
 
 #### Expected Responses Format
 - success [200]
@@ -113,21 +116,21 @@ The following endpoints were created to attend the challenge:
     "message": "Arquivo recebido com sucesso!"
 }
 ```
-- unprocessable_entity [422]
+- unprocessable_entity [422] (This occurs when required fields are missing.)
 ```json
 {
-    "message": "Erro ao processar - Arquivo contém campos em branco: _____. Processamento cancelado."
+    "message": "Erro ao processar - Arquivo contém campos em branco: X, Y. Processamento cancelado."
 }
 ```
 
-- bad_request [400]
+- bad_request [400] (This occurs when no file is provided or the uploaded file is not in CSV format.)
 ```json
 {
     "message": "Insira um arquivo no formato csv."
 }
 ```
 
-- internal_server_error [500]
+- internal_server_error [500] (This occurs when an unexpected error or issue rises during processing.)
  ```json
 {
     "message": "Erro ao processar - [Error message]."
@@ -136,20 +139,21 @@ The following endpoints were created to attend the challenge:
 
 
 ### GET /api/v1/feedback_responses
-- Retrieve all feedback entries. It's paginated (10 items per page) and you can access other pages on:
+- Retrieve all feedback entries. It's paginated (10 items per page) and you can access other pages by adding `?page=PAGE_NUMBER` to the following endpoint:
 ``` bash
-http://localhost:3000/api/v1/feedback_responses?page=PAGE_NUMBER
+http://localhost:3000/api/v1/feedback_responses
 ```
 
 #### Expected Response Format
 ```json
 {
     "meta": {
-        "pagina_atual": 2,
-        "prox_pag": null,
-        "pag_anterior": null,
-        "total_pags": 20,
-        "total_items": 200
+        "pagina_atual": 1,
+        "prox_pagina": 2,
+        "pagina_anterior": null,
+        "total_paginas": 50,
+        "items_por_pagina": 10,
+        "total_items": 500
     },
     "listagem": [
         ...
@@ -170,10 +174,11 @@ http://localhost:3000/api/v1/feedback_search/search?gender=outro&location=recife
 {
     "meta": {
         "pagina_atual": 1,
-        "prox_pag": null,
-        "pag_anterior": null,
-        "total_pags": 1,
-        "total_items": 1
+        "prox_pagina": 2,
+        "pagina_anterior": null,
+        "total_paginas": 4,
+        "items_por_pagina": 10,
+        "total_items": 35
     },
     "listagem": [
         {
@@ -230,21 +235,28 @@ http://localhost:3000/api/v1/feedback_search/structure_stats
 {
     "total": {
         "areas": {
-            "financeiro": 2,
-            "comercial": 3
+            "comercial": 100,
+            "recursos humanos": 100,
+            "financeiro": 100,
+            "tecnologia": 100,
+            "administrativo": 100
         },
         "cargos": {
-            "analista": 3,
-            "estagiário": 2
+            "diretor": 8,
+            "analista": 168,
+            "gerente": 101,
+            "coordenador": 139,
+            "estagiário": 84
         },
         "funcoes": {
-            "profissional": 5
+            "gestor": 123,
+            "profissional": 377
         }
     }
 }
 ```
 
-#### Expected Response Format
+### GET /api/v1/feedback_search/location_stats
 - Get statistics based on employees location.
 ``` bash
 http://localhost:3000/api/v1/feedback_search/location_stats
@@ -253,10 +265,11 @@ http://localhost:3000/api/v1/feedback_search/location_stats
 ```json
 {
     "localidades": {
-        "brasília": 2,
-        "recife": 1,
-        "são paulo": 1,
-        "porto alegre": 1
+        "brasília": 100,
+        "são paulo": 100,
+        "recife": 100,
+        "manaus": 100,
+        "porto alegre": 100
     }
 }
 ```
@@ -264,6 +277,6 @@ http://localhost:3000/api/v1/feedback_search/location_stats
 ## Assumptions and Decisions
 - Used the same field names as provided in the challenge instructions to ensure consistency.
 - Added validations during import to ensure data integrity.
-- To reduce redundancy, improve data normalization and performance, particularly for APIs, the "area", "cargo" and "funcao" columns were changed into dedicated models: Department, Position, and Function. This approach the goal was to demonstrate an understanding of scalable database design and how similar principles can be extended to other attributes as needed.
+- To reduce redundancy and improve normalization and performance, the "area", "cargo" and "funcao" columns were converted into dedicated models: **Department**, **Position**, and **Function**. The goal was to demonstrate an understanding of scalable database design principles, which can be extended to other attributes as needed.
 - Achieved 98.8% coverage with unit tests for models, services, and request tests for API endpoints (verifying responses and integration between components).
-
+- Stored environment variables in a .env file, ensuring a more flexible and secure configuration.

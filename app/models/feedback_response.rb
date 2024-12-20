@@ -11,4 +11,6 @@ class FeedbackResponse < ApplicationRecord
   belongs_to :department
   belongs_to :position
   belongs_to :function
+
+  LIMIT = 10
 end

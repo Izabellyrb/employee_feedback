@@ -6,7 +6,7 @@ module Api
       before_action :check_dataset_file, only: %i[create]
 
       def index
-        feedback_responses = FeedbackResponse.order(created_at: :desc).page(params[:page]).per(10)
+        feedback_responses = FeedbackResponse.order(created_at: :desc).page(params[:page]).per(FeedbackResponse::LIMIT)
         render json: { meta: pagination_meta(feedback_responses), listagem: feedback_responses }
       end
 
@@ -31,9 +31,10 @@ module Api
       def pagination_meta(feedback_responses)
         {
           pagina_atual: feedback_responses.current_page,
-          prox_pag: feedback_responses.next_page,
-          pag_anterior: feedback_responses.prev_page,
-          total_pags: feedback_responses.total_pages,
+          prox_pagina: feedback_responses.next_page,
+          pagina_anterior: feedback_responses.prev_page,
+          total_paginas: feedback_responses.total_pages,
+          items_por_pagina: feedback_responses.limit_value,
           total_items: feedback_responses.total_count
         }
       end
