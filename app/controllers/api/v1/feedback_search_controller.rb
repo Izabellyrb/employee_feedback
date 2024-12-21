@@ -4,35 +4,25 @@ module Api
   module V1
     class FeedbackSearchController < FeedbackResponsesController
       def search
-        feedback_responses = FeedbackResponse
-
-        if params.present?
-          feedback_params.each do |key, value|
-            feedback_responses = feedback_responses.where(key => value)
-          end
-        end
-
-        result = feedback_responses.order(created_at: :desc).page(params[:page]).per(10)
+        result = SearchService.new(permitted_params, params[:page]).call
         render json: { meta: pagination_meta(result), listagem: result }
       end
 
       def structure_stats
-        department_count = FeedbackResponse.joins(:department).group("departments.name").count
-        position_count = FeedbackResponse.joins(:position).group("positions.name").count
-        function_count = FeedbackResponse.joins(:function).group("functions.name").count
+        structure = StatisticsService.structure_stats
 
-        render json: { total: { areas: department_count, cargos: position_count, funcoes: function_count } }
+        render json: { total: structure }
       end
 
       def location_stats
-        location_count = FeedbackResponse.group(:location).count
+        location_count = StatisticsService.location_stats
 
         render json: { localidades: location_count }
       end
 
       private
 
-      def feedback_params
+      def permitted_params
         params.permit(
           :name, :email, :corporate_email, :location, :company_tenure, :gender,
           :generation, :company_level_0, :directorate_level_1, :management_level_2, :coordination_level_3,

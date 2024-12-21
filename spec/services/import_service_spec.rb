@@ -24,10 +24,10 @@ RSpec.describe ImportService do
 
     context "when some error happens" do
       before do
-        allow_any_instance_of(described_class).to receive(:run).and_raise(StandardError, "Erro")
+        allow(CSV).to receive(:foreach).and_raise(StandardError, "Some error")
       end
 
-      it { expect { result }.to raise_error(StandardError) }
+      it { expect(result[:status]).to eq :internal_server_error }
       it { expect(FeedbackResponse.count).to eq(0) }
     end
   end

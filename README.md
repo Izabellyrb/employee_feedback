@@ -72,7 +72,7 @@ The fields and content are in Portuguese, but the english translations were used
 ### Setup
 - Clone the repository:
 ```bash
-git clone git@github.com:Izabellyrb/employee_feedback.git
+git clone git@github.com:Izabellyrb/employee_feedback.git # or https://github.com/Izabellyrb/employee_feedback.git
 cd employee_feedback
 ```
 
@@ -287,6 +287,7 @@ http://localhost:3000/api/v1/feedback_search/location_stats
 ## Assumptions and Decisions
 - Used the same field names as provided in the challenge instructions to ensure consistency.
 - Added validations during import to ensure data integrity.
-- To reduce redundancy and improve normalization and performance, the "area", "cargo" and "funcao" columns were converted into dedicated models: **Department**, **Position**, and **Function**. The goal was to demonstrate an understanding of scalable database design principles, which can be extended to other attributes as needed.
-- Achieved 98.8% coverage with unit tests for models, services, and request tests for API endpoints (verifying responses and integration between components).
+- To reduce redundancy and improve normalization and performance, the "area", "cargo" and "funcao" columns were converted into dedicated models: **Department**, **Position**, and **Function**. The goal was to demonstrate an understanding of scalable database design principles, which can be extended to other attributes of the main table as needed.
+- Achieved 100% coverage with unit tests for models, services, and request tests for API endpoints (verifying responses and integration between components).
 - Stored environment variables in a .env file, ensuring a more flexible and secure configuration.
+- Opted not to implement background job processing with Sidekiq, as current requirements do not justify it. However, it is a recommended improvement for handling higher data volumes in the future.
