@@ -1,4 +1,4 @@
-# Technical Challenge - Employee Feedback
+# Employee Feedback
 
 - **[Overview](#overview)**
 - **[Completed Tasks](#completed-tasks)**
@@ -173,7 +173,7 @@ http://localhost:3000/api/v1/feedback_responses
 
 
 ### GET /api/v1/feedback_search/search
-- Searches employees feedback data. You can filter by any of the file columns (position (cargo), location (localidate), name (nome), enps, etc). 
+- Searches employees feedback data. You can filter by any of the file columns (position (cargo), location (localidade), name (nome), enps, etc). 
 
 ``` bash
 http://localhost:3000/api/v1/feedback_search/search?gender=outro&location=recife
